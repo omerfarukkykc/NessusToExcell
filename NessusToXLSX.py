@@ -13,7 +13,7 @@ class ReportHostItem:
         self.description = description
         self.cve = cve
         self.severity = severity
-        self.severity = severityID
+        self.severityID = severityID
     def print(self):
         print(f"{self.plugin_name}")
 class ReportHost:
@@ -54,7 +54,7 @@ def ParseReportHostItem(reportHostItem):
             cve= Item.text
     if plugin_name =="" and plugin_output=="" and description == "" and cve =="":
         return None
-    return ReportHostItem(plugin_name,plugin_output,description,cve,GetSeverity(severityID),severityID)
+    return ReportHostItem(plugin_name,plugin_output,description,cve,GetSeverity(severityID),int(severityID))
 def ParseReportHost(reportHost):
     if reportHost.tag != "ReportHost":
         return
@@ -122,8 +122,8 @@ if __name__ == "__main__":
     parser.add_argument("-i", dest="input_file", type=check_input_file, default="scan.nessus", help="Path to the input file")
     parser.add_argument("-o", dest="output_file", default="output.txt", help="Path to the output file")
     parser.add_argument("-s", dest="severity", type=check_severity, default=2, choices=[0, 1, 2, 3, 4], 
-                        help="Minimum severity level: 0 (informational), 1 (low), 2 (medium), 3 (high), 4 (critical)")
-    parser.add_argument("--cve", action="store_true", help="Just Include CVE information")
+                        help="(Default 2) Minimum severity level: 0 (informational), 1 (low), 2 (medium), 3 (high), 4 (critical)")
+    parser.add_argument("--cve", action="store_true", help="Just Include if has CVE information")
 
 
     args = parser.parse_args()
