@@ -1,4 +1,4 @@
 # NessusToExcell
 
 
-convert .nessus file to xlsx table
+Convert .nessus file to xlsx table
